@@ -1,62 +1,31 @@
+#print("hola mundo")
+
+#IMportamos los recursos necesarios
 import random
 import string
+#menu Principal
+print("=== Generador Seguro de Contraseñas ===")
+#configuraciones a aleccion del usuario
+longitud = int(input("Ingrese la longitud de la contraseña: "))
+usar_mayusculas = input("¿Incluir mayúsculas? (s/n): ").lower() == "s"
+usar_numeros = input("¿Incluir números? (s/n): ").lower() == "s"
+usar_simbolos = input("¿Incluir símbolos? (s/n): ").lower() == "s"
+#condicionales
+caracteres = string.ascii_lowercase
 
-# Función para generar la contraseña
-def generar_contrasena(longitud, mayusculas, numeros, simbolos):
+if usar_mayusculas:
+    caracteres += string.ascii_uppercase
 
-    caracteres = string.ascii_lowercase
+if usar_numeros:
+    caracteres += string.digits
 
-    if mayusculas:
-        caracteres += string.ascii_uppercase
+if usar_simbolos:
+    caracteres += string.punctuation
 
-    if numeros:
-        caracteres += string.digits
+contrasena = ""
 
-    if simbolos:
-        caracteres += string.punctuation
-
-    contrasena = ""
-
-    for i in range(longitud):
-        contrasena += random.choice(caracteres)
-
-    return contrasena
-
-
-# Menú principal
-while True:
-
-    print("\n===== GENERADOR SEGURO DE CONTRASEÑAS =====")
-
-    try:
-        longitud = int(input("Ingrese la longitud de la contraseña: "))
-
-        if longitud <= 0:
-            print("La longitud debe ser mayor que cero.")
-            continue
-
-    except ValueError:
-        print("Ingrese un número válido.")
-        continue
-
-    mayusculas = input("¿Incluir mayúsculas? (s/n): ").lower() == "s"
-    numeros = input("¿Incluir números? (s/n): ").lower() == "s"
-    simbolos = input("¿Incluir símbolos? (s/n): ").lower() == "s"
-
-    contrasena = generar_contrasena(
-        longitud,
-        mayusculas,
-        numeros,
-        simbolos
-    )
-
-    print("\nContraseña generada:")
-    print(contrasena)
-
-    repetir = input(
-        "\n¿Desea generar otra contraseña? (s/n): "
-    ).lower()
-
-    if repetir != "s":
-        print("Programa finalizado.")
-        break
+for _ in range(longitud):
+    contrasena += random.choice(caracteres)
+#resultado
+print("Contraseña generada:")
+print(contrasena)
